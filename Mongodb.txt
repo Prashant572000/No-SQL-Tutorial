@@ -1,0 +1,519 @@
+                 #      NoSql (Mongodb) in One video
+
+C:\Users\prash>mongo
+MongoDB shell version v4.2.7
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("d068553b-f9eb-4f08-b3e5-c8413483d513") }
+MongoDB server version: 4.2.7
+Server has startup warnings:
+2020-07-29T16:40:14.896+0530 I  CONTROL  [initandlisten]
+2020-07-29T16:40:14.896+0530 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2020-07-29T16:40:14.896+0530 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2020-07-29T16:40:14.933+0530 I  CONTROL  [initandlisten]
+---
+Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+and anyone you share the URL with. MongoDB may use this information to make product
+improvements and to suggest MongoDB products and deployment options to you.
+
+To enable free monitoring, run the following command: db.enableFreeMonitoring()
+To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+
+
+# Close above cmd window or Open new Cmd and type following commands
+
+C:\Users\prash>mongo -version                  # To check if mongo successfully installed
+MongoDB shell version v4.2.7
+git version: 51d9fe12b5d19720e72dcd7db0f2f17dd9a19212
+allocator: tcmalloc
+modules: none
+build environment:
+    distmod: 2012plus
+    distarch: x86_64
+    target_arch: x86_64
+
+C:\Users\prash>mongo                         # To start mongo server
+MongoDB shell version v4.2.7
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("a387b74c-b05b-4cd8-af1e-5b5a6922557c") }
+MongoDB server version: 4.2.7
+Server has startup warnings:
+2020-07-29T16:40:14.896+0530 I  CONTROL  [initandlisten]
+2020-07-29T16:40:14.896+0530 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2020-07-29T16:40:14.896+0530 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2020-07-29T16:40:14.933+0530 I  CONTROL  [initandlisten]
+---
+Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+and anyone you share the URL with. MongoDB may use this information to make product
+improvements and to suggest MongoDB products and deployment options to you.
+
+To enable free monitoring, run the following command: db.enableFreeMonitoring()
+To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+                   # Now your mongo server is on and successfully installed
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+mydb    0.000GB
+mydb`   0.000GB
+
+> use  prashdb                   # To create and usedatabase
+switched to db prashdb
+
+> db.createCollection("biodata") # To create Collection
+{ "ok" : 1 }
+
+> use  prashdb                      
+switched to db prashdb
+
+> show dbs
+admin    0.000GB
+config   0.000GB
+local    0.000GB
+mydb     0.000GB
+mydb`    0.000GB
+prashdb  0.000GB
+
+> db                         #  To check what database are you in 
+prashdb
+
+> show dbs
+admin    0.000GB
+config   0.000GB
+local    0.000GB
+mydb     0.000GB
+mydb`    0.000GB
+prashdb  0.000GB
+
+> use mydb`
+switched to db mydb`
+
+> db.dropDatabase()          # To delete the database
+{ "dropped" : "mydb`", "ok" : 1 }
+
+
+> show dbs                  # It list all databases in MongoDB
+admin    0.000GB
+config   0.000GB
+local    0.000GB
+mydb     0.000GB
+prashdb  0.000GB
+
+> use prashdb                                                        # To create and use database
+switched to db prashdb
+
+>db.biodata.insertOne( {_id : 5 , "Name" : "Karan" , Class :11 } )   # To insert single record
+{ "acknowledged" : true, "insertedId" : 5 }
+
+> db.biodata.insertMany([{_id : 2 , Name : "Vicky" , Age :25 , } ,   # To insert Multiple record
+                         {_id : 3 , Name : "Anmol" , class : 12 }])
+{ "acknowledged" : true, "insertedIds" : [ 2, 3 ] }
+
+
+> db.biodata.find()                                          # To Show all records in Database
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+
+
+> db.biodata.insert({_id : 4 , "Name" : "vihant" , Class : 12}) # It also used for insert record But it did't shows last record id
+WriteResult({ "nInserted" : 1 })
+
+> db.biodata.find()
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+
+
+> db.biodata.find().pretty()          # To see all records in proper way
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+
+
+> db.biodata.find()
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+>
+                     # Operators
+
+> db.biodata.find({class : {$eq : 12}})
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+
+
+> db.biodata.find({Class : {$eq : 12}})
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+
+
+> db.biodata.find({Age : {$gt: 24}})
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+
+> db.biodata.find({Age : {$gte: 25}})
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+>
+> db.biodata.find({Age : {$lt: 25}})
+
+> db.biodata.find({Age : {$lte: 25}})
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+
+
+> db.biodata.find()
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+
+
+> db.biodata.find({Name : {$in : ['Prashant' , 'Anmol']}})
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+
+
+> db.biodata.find({Name : {$in : ['Prashant' , 'Anmol' , 'Vicky']}})
+
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+
+> db.biodata.find({Name : {$nin : ['Prashant' , 'Anmol']}})
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+
+
+> db.biodata.find ()
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+>
+
+> db.biodata.find ( {$and :[ {"Name" : 'Anmol' } , { class : 12  } ] } )
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+
+
+> db.biodata.find ( {$or :[ {"Name" : 'Anmo' } , { class : 12  } ] } )
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+
+
+> db.biodata.find ( {$or :[ {"Name" : 'Anmol' } , { Class : 10  } ] } )
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+
+
+> db.biodata.find ( {_id : {$not :  {$gt : 25 } } } )
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+
+
+> db.biodata.find ( {_id : {$not :  {$gt : 3 } } } )
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+
+
+> show tables                       # To show collections(Tables) of your current database
+biodata
+>
+> db.biodata.find()
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+
+
+> db.biodata.find({Class : {$eq : 12}})
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+
+> db.biodata.find({Name : {$eq : "Anmol"}})
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+
+
+
+> db.biodata.find({Name : {$eq : "Anmol"}} , {class :0  } )
+{ "_id" : 3, "Name" : "Anmol" }
+
+
+> db.biodata.find({Name : {$eq : "Anmol"}} , {class :0 , _id :0 } )
+{ "Name" : "Anmol" }
+
+> db.biodata.find({Name : {$eq : "Anmol"}} , {Name : 1 } )
+{ "_id" : 3, "Name" : "Anmol" }
+
+
+> db.biodata.find({Name : {$eq : "Anmol"}} , {class : 1 } )
+{ "_id" : 3, "class" : 12 }
+
+
+> db.biodata.find({Name : {$eq : "Anmol"}} , {class : 1 , _id :0 } )
+{ "class" : 12 }
+
+
+#                   # To  Count how many records in collection
+
+> db.biodata.find().count()
+4
+
+
+> db.biodata.find ( {_id : {$gt : 3 } } )
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+
+
+> db.biodata.find ( {_id : {$gt : 3 } } ).count()
+1
+
+
+> db.biodata.find()
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+
+
+
+#          # To Sort record By Ascending/Descending Order   [Ascending - 1 , Descending-(-1) ]
+
+> db.biodata.find().sort({Name : 1 })                 
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+
+
+> db.biodata.find().sort({Name : -1 })
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+
+
+
+
+# To show records in specific limit
+
+
+> db.biodata.find().sort({Name : -1 }).limit(2)
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+
+> db.biodata.find().sort({Name : -1 }).limit(-2)
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+
+> db.biodata.find().sort({Name : 1 }).limit(-2)
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10 }
+
+
+
+> db.biodata.find()
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+
+
+#               Update Records of Collection
+
+> db.biodata.updateOne( {_id :1 }, {$set : {Age : 21  } } )   # Update one field of collection
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+>
+> db.biodata.find()
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10, "Age" : 21 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+
+
+
+> db.biodata.updateOne ( { _id :3 } , {$set :  { Age : 23} } )
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+>
+
+> db.biodata.find()
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10, "Age" : 21 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12, "Age" : 23 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+
+
+> db.biodata.updateOne ( { _id :3 } , {$set :  { Age : 20} } )
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+
+
+> db.biodata.find()
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10, "Age" : 21 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12, "Age" : 20 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+
+
+
+> db.biodata.updateOne ( { _id :2 } , {$set :  { Class :11} } )
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+
+> db.biodata.find()
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10, "Age" : 21 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25, "Class" : 11 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12, "Age" : 20 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 12 }
+
+
+
+> db.biodata.updateOne ( { _id :4 } , {$set :  {Age :24} } )
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+
+
+
+
+
+> db.biodata.find()
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10, "Age" : 21 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25, "Class" : 11 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12, "Age" : 20 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 12, "Age" : 24 }
+
+
+
+
+
+
+> db.biodata.updateOne ( { _id :4 } , {$set :  {Class :9} } )
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+
+
+
+> db.biodata.find()
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10, "Age" : 21 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25, "Class" : 11 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12, "Age" : 20 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 9, "Age" : 24 }
+
+
+
+> db.biodata.find()
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10, "Age" : 21 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25, "Class" : 11 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12, "Age" : 20 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 10, "Age" : 24 }
+
+
+> db.biodata.updateMany ( { _id :4 } , {$set :  {Class :10} } , { _id : 2 } ,  { $set : { Class : 8}}  ) # Update Multiple field of collection
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 0 }
+
+
+> db.biodata.find()
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10, "Age" : 21 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25, "Class" : 11 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12, "Age" : 20 }
+{ "_id" : 4, "Name" : "vihant", "Class" : 10, "Age" : 24 }
+
+
+
+#                  To delete Records in collection
+
+
+> db.biodata.deleteOne( { _id :4})
+{ "acknowledged" : true, "deletedCount" : 1 }
+
+> db.stu.deleteMany({_id : 3} , {_id:4 })            # Delete multiple records from collection
+{ "acknowledged" : true, "deletedCount" : 1 }
+
+
+> db.biodata.find()
+{ "_id" : 1, "Name" : "Prashant", "Class" : 10, "Age" : 21 }
+{ "_id" : 2, "Name" : "Vicky", "Age" : 25, "Class" : 11 }
+{ "_id" : 3, "Name" : "Anmol", "class" : 12, "Age" : 20 }
+
+
+
+                    # To see Relationship in Mongodb (Nosql)
+
+> db.techsur.insert(
+... {
+... "_id"    : 1,
+... "B_name" : "Intro to dbms",
+...
+... Comments : [
+... {
+... "Username" : "Sachin",
+... "Comment"  : "Awesome"
+... },
+... {
+... "Username" : "Vicky",
+...  "Comment" : "What a blog"
+...  }
+... ]
+... }
+... )
+WriteResult({ "nInserted" : 1 })
+
+
+
+
+> db.techsur.find()
+{ "_id" : 1, "B_name" : "Intro to dbms", "Comments" : [ { "Username" : "Sachin", "Comment" : "Awesome" }, { "Username" : "Vicky", "Comment" : "What a blog" } ] }
+
+
+
+
+> db.techsur.find().pretty()
+{
+        "_id" : 1,
+        "B_name" : "Intro to dbms",
+        "Comments" : [
+                {
+                        "Username" : "Sachin",
+                        "Comment" : "Awesome"
+                },
+                {
+                        "Username" : "Vicky",
+                        "Comment" : "What a blog"
+                }
+        ]
+}
+
+
+# To see specific column in Collection set column 1 to show , else 0 for hide  
+
+
+
+> db.techsur.find( {_id :1 } , {Comments : 1})
+{ "_id" : 1, "Comments" : [ { "Username" : "Sachin", "Comment" : "Awesome" }, { "Username" : "Vicky", "Comment" : "What a blog" } ] }
+
+
+
+> db.techsur.find( {_id :1 } , {Comments : 1 , _id :0})
+{ "Comments" : [ { "Username" : "Sachin", "Comment" : "Awesome" }, { "Username" : "Vicky", "Comment" : "What a blog" } ] }
+
+
+
+> db.techsur.find( {_id :1 } , {Comments : 1 , _id :0}).pretty()
+{
+        "Comments" : [
+                {
+                        "Username" : "Sachin",
+                        "Comment" : "Awesome"
+                },
+                {
+                        "Username" : "Vicky",
+                        "Comment" : "What a blog"
+                }
+        ]
+}
